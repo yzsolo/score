@@ -88,12 +88,12 @@ class console extends CI_Controller{
 	//**************************
 	//功能：返回一个选手对应所有老师的评分(2012/04/20)
 	public function athlete_score(){
-		  $res = $this->console_model->last_athlete_score();
+			$spknum = $_POST['spknum'];
+		  $res = $this->console_model->last_athlete_score($spknum);
 		 
 		 
 		  $data = json_encode($res);
-		   print_r($data);
-		  return $data;
+		  echo $data;
 
 
 	}
@@ -104,8 +104,8 @@ class console extends CI_Controller{
 		$res = $this->console_model->athlete_score_fin();
 		
 		$data_result = json_encode($res);
-		print_r($data_result);
-		return $data_result;
+		// print_r($data_result);
+		echo $data_result;
 	}
 
 	//功能：判断点击的按钮，返回按钮对应的标志位。

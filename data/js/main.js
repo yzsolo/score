@@ -2,6 +2,31 @@ $(function(){
   // $("#page_one").hide();
   // $("#page_two").hide();
   // $("#page_three").hide();
+  time(5,0);
+  function time(m,s){
+         minute =m;
+         second =s;
+        $("#min").html(minute);
+        $("#sec2").html(second);
+        var setinter=setInterval(run,1000);
+        function run(){
+            if(!second){
+                minute -=1;
+                second = 60;
+                $("#sec1").css("display","none");
+            }else if(second<=10){
+                $("#sec1").css("display","block");
+            }
+            second -=1;
+            $("#min").html(minute);
+            $("#sec2").html(second);
+            if(second ==0 && minute ==0){
+                  clearInterval(setinter);
+              }
+        }
+  }
+
+
 
   $('#judges-submit').click(function(){
         var inputLength = $('.input-small').length;
@@ -91,7 +116,7 @@ $(function(){
             success:function(result){
               if(result == 1){
                 // alert("开始");
-                // window.location.reload()
+               // window.location.reload()
                 $("#page_one").show();
                 $("#page_two").hide();
                 $("#page_three").hide();
@@ -121,41 +146,56 @@ $(function(){
 
 
 var i=0;
+var messlen;
 var move2 = setInterval(function(){
-    var cur_num = $(".stu_num").html();
+    var cur_num = parseInt($(".stu_num").html());
       $.ajax({
             type:"POST",
             url:getRootPath()+"/index.php/console/athlete_score",
             async:true,
+            data:{spknum:cur_num},
             success:function(imge){
-                var mess = eval(imge);
+                var mess = $.parseJSON(imge);
+                console.log(mess);
                 // alert(mess[i].sperker_number);
-                var stu_num = mess[i].sperker_number;
-                    if(cur_num*1 == stu_num*1)
-                    {
-                        $("#judge_score").after('<ul class="thumbnails" id="thumbnails"><li class="span2"><div class="thumbnail"><img data-src="holder.js/300x200" alt="" src="'+mess[i].ju_photo+'"><h3>'+mess[i].ju_name+'</h3><span class="label label-info" id="pic">已打分'+mess[i].score+'</span></div></li></ul>');
-                        i++;
+                messlen = mess.length;
+                $judge_score = $("#judge_score");
+                // for(var i = 0; i < mess.length; i++) {
+                  $node = ("<ul class='thumbnails' id='thumbnails'><li class='span2'><div class='thumbnail'><img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'><h3>"+mess[i].ju_name+"</h3><span class='label label-info' id='pic'>已打分"+mess[i].score+"</span></div></li></ul>");
+                   $('#judge_score').after($node);
+                   console.log(i);
+                   if(i < messlen)
+                   {
+                      
+
+                      i++;
+                    } else {
+
+                      i = messlen-1;
+                      
                     }
-                    else{
-                        i++;
-                    }                  
+
+                    if(mess[0].is_next != 0 ) {
+
+                        i = 0;
+                    }       
                 }
             })
   },2000)
 
 
-// var move3 = setInterval(function(){
-//         $.ajax({
-//             type:"POST",
-//             url:getRootPath()+"/index.php/console/athlete_score_fin",
-//             success:function(result){
-//              var mesa = eval(result);
-//              $("maxscore").html(mesa[0].max_score);
-//              $("minscore").html(mesa[0].min_score);
-//              $("finscore").html(mesa[0].fin_score);
-//             }
-//         })
-//   },1000)
+var move3 = setInterval(function(){
+        $.ajax({
+            type:"POST",
+            url:getRootPath()+"/index.php/console/athlete_score_fin",
+            success:function(result){
+             var mesa = $.parseJSON(result);
+             $("maxscore").html(mesa[0].max_score);
+             $("minscore").html(mesa[0].min_score);
+             $("finscore").html(mesa[0].fin_score);
+            }
+        })
+  },1000)
 
 function getRootPath() //得到网站的根目录
   { 

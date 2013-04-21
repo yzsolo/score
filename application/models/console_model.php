@@ -3,6 +3,8 @@ class console_model extends CI_Model{
 	public function __construct(){
 		parent::__construct();
 		$this->load->database();
+		// global $is_next = 0;
+
 
 	}
 
@@ -33,6 +35,7 @@ class console_model extends CI_Model{
 	}
 
 	public function last_athlete(){
+
 		$sql = "select athlete from score_transition where id=(select max(id) from score_transition ) ";
 		$query = $this->db->query($sql);
 		$res = $query->result_array();
@@ -47,16 +50,21 @@ class console_model extends CI_Model{
 	}
 
 	//功能：返回所有评委对该选手所打的分。
-	public function last_athlete_score(){
-		$sql = "select number from score_transition1 where id=(select max(id) from score_transition1)";
+	public function last_athlete_score($spknum){
+
+		$sql = "select number from score_transition1 
+		where 
+		id= (select max(id) from score_transition1) AND number = '$spknum' ";
+
 		$query = $this->db->query($sql);
 		$res = $query->result_array();
 		
 		 if($res){
 			$parm = $res[0]['number'];
-
-			$sql1 = "select * from score_table,score_judge_info,score_contestent_info where sperker_number = '$parm' and (flags !='1') and
-					(score_table.judge_number=score_judge_info.ju_number and score_table.sperker_number=score_contestent_info.number) ";
+			
+		
+				$sql1 = "select  from score_table,score_judge_info,score_contestent_info where sperker_number = '$parm' and (flags !='1') and
+					(score_table.judge_number=score_judge_info.ju_number and score_table.sperker_number=score_contestent_info.number) "; 
 			$query = $this->db->query($sql1);
 			$result = $query->result_array();
 			return $result;

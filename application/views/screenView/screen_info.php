@@ -1,26 +1,26 @@
 <script type="text/javascript">
       $(document).ready(function(){
-        var a =  1;
-         minute = 5;
-         second =0;
-        $("#min").html(minute);
-        $("#sec2").html(second);
-        var setinter=setInterval(run,1000);
-        function run(){
-            if(!second){
-                minute -=1;
-                second = 60;
-                $("#sec1").css("display","none");
-            }else if(second<=10){
-                $("#sec1").css("display","block");
-            }
-            second -=1;
-            $("#min").html(minute);
-            $("#sec2").html(second);
-            if(second ==0 && minute ==0){
-                  clearInterval(setinter);
-              }
-        }
+        // var a =  1;
+        //  minute = 5;
+        //  second =0;
+        // $("#min").html(minute);
+        // $("#sec2").html(second);
+        // var setinter=setInterval(run,1000);
+        // function run(){
+        //     if(!second){
+        //         minute -=1;
+        //         second = 60;
+        //         $("#sec1").css("display","none");
+        //     }else if(second<=10){
+        //         $("#sec1").css("display","block");
+        //     }
+        //     second -=1;
+        //     $("#min").html(minute);
+        //     $("#sec2").html(second);
+        //     if(second ==0 && minute ==0){
+        //           clearInterval(setinter);
+        //       }
+        // }
 
         // setInterval(function(){
         //   if(a != current_stu){
