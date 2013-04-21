@@ -1,5 +1,7 @@
 $(function(){
-
+  // $("#page_one").hide();
+  // $("#page_two").hide();
+  // $("#page_three").hide();
 
   $('#judges-submit').click(function(){
         var inputLength = $('.input-small').length;

@@ -68,7 +68,7 @@
 </head>
 <body>
   <!-- page1 start-->
-<div class="container well" id="page_one">
+<div class="container well" id="page_one" style="'display',none">
   <div class="stu_num"></div>
   <div class="load_js"></div>
   <div class="span12 text-left text-success" id="screen_num"><h2><small><strong>一号参赛选手</strong></small></h2></div>
@@ -102,7 +102,7 @@
   </div>
   <!-- page1 end -->
 <!-- page2 start -->
-<div class="row" id="page_two">
+<div class="row" id="page_two" style="'display',none">
     <div class="container" id="container_judge">
       <div class="row" id="judge_score">
         <h1>评委正在打分哦~~</h1>
@@ -120,7 +120,7 @@
   </div>
 <!-- page2 end -->
 <!-- page3 start -->
-<div class="container" id="page_three">
+<div class="container" id="page_three" style="'display',none">
     <div class="row">
       
         <ul class="thumbnails" id="thumbnails">
