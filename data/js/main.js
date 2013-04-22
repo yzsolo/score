@@ -159,10 +159,10 @@ var move2 = setInterval(function(){
                 
                 var mess = $.parseJSON(imge);
                 console.log(mess);
-                messlen = mess.length;
-                console.log(messlen);
+               
                 if( mess.is_next == undefined ) {
-                      
+                    messlen = mess.length;
+                    console.log(messlen);
                     is_next = mess[0].is_next;
                     $judge_score = $("#judge_score");
                      
