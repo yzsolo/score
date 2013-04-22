@@ -95,7 +95,7 @@ class console extends CI_Controller{
 
 		  $data = json_encode($res);
 		  echo $data;
-
+		  //data
 
 	}
 
