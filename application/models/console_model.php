@@ -70,7 +70,7 @@ class console_model extends CI_Model{
 				$result['judge_number_flag'] = $is_next;//当此参数为1时，是下一位选手。
 			}
 			
-		
+			//zhishi
 				// $sql1 = "select score_table.judge_number,score_table.sperker_number,
 				// score_table.score,score_judge_info.ju_name,score_judge_info.ju_name,
 				// score_judge_info.ju_photo,score_judge_info.ju_info
