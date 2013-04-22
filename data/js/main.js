@@ -149,53 +149,63 @@ var i=0;
 var messlen;
 var move2 = setInterval(function(){
     var cur_num = parseInt($(".stu_num").html());
+        // alert(cur_num);
       $.ajax({
             type:"POST",
             url:getRootPath()+"/index.php/console/athlete_score",
             async:true,
             data:{spknum:cur_num},
             success:function(imge){
+                
                 var mess = $.parseJSON(imge);
                 console.log(mess);
-                // alert(mess[i].sperker_number);
                 messlen = mess.length;
-                $judge_score = $("#judge_score");
-                // for(var i = 0; i < mess.length; i++) {
-                  $node = ("<ul class='thumbnails' id='thumbnails'><li class='span2'><div class='thumbnail'><img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'><h3>"+mess[i].ju_name+"</h3><span class='label label-info' id='pic'>已打分"+mess[i].score+"</span></div></li></ul>");
-                   $('#judge_score').after($node);
-                   console.log(i);
-                   if(i < messlen)
-                   {
+                console.log(messlen);
+                if( mess.is_next == undefined ) {
                       
+                    is_next = mess[0].is_next;
+                    $judge_score = $("#judge_score");
+                     
+                    if( i < messlen ){
 
+                      $node = ("<ul class='thumbnails' id='thumbnails'><li class='span2'><div class='thumbnail'><img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'><h3>"+mess[i].ju_name+"</h3><span class='label label-info' id='pic'>已打分"+mess[i].score+"</span></div></li></ul>");
+                      $('#judge_score').after($node);
                       i++;
                     } else {
 
-                      i = messlen-1;
-                      
-                    }
+                        i = messlen;
 
-                    if(mess[0].is_next != 0 ) {
+                      }
 
-                        i = 0;
-                    }       
+                     
+                        console.log(i);
+                        console.log(is_next);
+                  } else {
+
+                        is_next = mess.is_next;
+                  } 
+
+                  if(is_next == 1 ) {
+
+                            i = 0;
+                  }   
                 }
             })
   },2000)
 
 
-var move3 = setInterval(function(){
-        $.ajax({
-            type:"POST",
-            url:getRootPath()+"/index.php/console/athlete_score_fin",
-            success:function(result){
-             var mesa = $.parseJSON(result);
-             $("maxscore").html(mesa[0].max_score);
-             $("minscore").html(mesa[0].min_score);
-             $("finscore").html(mesa[0].fin_score);
-            }
-        })
-  },1000)
+// var move3 = setInterval(function(){
+//         $.ajax({
+//             type:"POST",
+//             url:getRootPath()+"/index.php/console/athlete_score_fin",
+//             success:function(result){
+//              var mesa = $.parseJSON(result);
+//              $("maxscore").html(mesa[0].max_score);
+//              $("minscore").html(mesa[0].min_score);
+//              $("finscore").html(mesa[0].fin_score);
+//             }
+//         })
+//   },1000)
 
 function getRootPath() //得到网站的根目录
   { 

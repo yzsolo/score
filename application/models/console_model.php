@@ -3,7 +3,6 @@ class console_model extends CI_Model{
 	public function __construct(){
 		parent::__construct();
 		$this->load->database();
-		
 
 	}
 
@@ -58,17 +57,18 @@ class console_model extends CI_Model{
 		$query = $this->db->query($sql);
 		$res = $query->result_array();
 		
-		
+		 
 		 if($res){
 			$parm = $res[0]['number'];
-			if($spknum == $parm){
+			
+			// if($spknum == $parm){
 
-			$result['judge_number_flag'] =$is_next; //当此参数为0时，选手未改变。
+			// $result['judge_number_flag'] =0; //当此参数为0时，选手未改变。
 
-			}else{
-				$is_next = 1;
-				$result['judge_number_flag'] = $is_next;//当此参数为1时，是下一位选手。
-			}
+			// }else if($spknum!=$parm){
+				
+			// 	$result['judge_number_flag'] = 1;//当此参数为1时，是下一位选手。
+			// }
 			
 			//zhishi
 				// $sql1 = "select score_table.judge_number,score_table.sperker_number,
@@ -78,19 +78,42 @@ class console_model extends CI_Model{
 				// score_contestent_info AS sci where st.sperker_number = '$parm' and (st.flags !='1') and
 				// 	(st.judge_number=sji.ju_number and st.sperker_number=sci.number) ";
 
-			$sql1 = "select score_table.judge_number,score_table.sperker_number,score_table.score,score_judge_info.ju_name,score_judge_info.ju_name,score_judge_info.ju_photo,score_judge_info.ju_info from score_table,score_judge_info where score_table.sperker_number = '$parm' and (score_table.judge_number=score_judge_info.ju_number) ";  
-			$query = $this->db->query($sql1);
-			$result = $query->result_array();
-			if($spknum == $parm){
+			  
 
-			$result['judge_number_flag'] =$is_next; //当此参数为0时，选手未改变。
-
-			}else{
-				$is_next = 1;
-				$result['judge_number_flag'] = $is_next;//当此参数为1时，是下一位选手。
+			if(	$parm == $spknum )
+			{
+				$is_next = 0; //当此参数为0时，选手未改变。
 			}
-			
-			return $result;
+			else
+			{
+				$is_next = 1;//当此参数为1时，是下一位选手。
+
+			}
+
+			$sql1 = "SELECT '$is_next' AS is_next,score_table.judge_number,
+					score_table.sperker_number,score_table.score,
+					score_judge_info.ju_name,
+					score_judge_info.ju_name,
+					score_judge_info.ju_photo,
+					score_judge_info.ju_info 
+					FROM score_table,score_judge_info 
+					WHERE 
+					score_table.sperker_number = '$parm' AND 
+					(score_table.judge_number=score_judge_info.ju_number) ";
+					$query = $this->db->query($sql1);
+					$result = $query->result_array();
+					
+					if(count( $result) > 0)
+					{
+						 return $result;
+					}
+					else
+					{
+						
+						return array("is_next" => $is_next);
+					}
+
+
 		
 			
 		 }else{
