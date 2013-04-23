@@ -3,8 +3,6 @@ class console_model extends CI_Model{
 	public function __construct(){
 		parent::__construct();
 		$this->load->database();
-		// global $is_next = 0;
-
 
 	}
 
@@ -54,20 +52,68 @@ class console_model extends CI_Model{
 
 		$sql = "select number from score_transition1 
 		where 
-		id= (select max(id) from score_transition1) AND number = '$spknum' ";
+		id= (select max(id) from score_transition1)";
 
 		$query = $this->db->query($sql);
 		$res = $query->result_array();
 		
+		 
 		 if($res){
 			$parm = $res[0]['number'];
 			
-		
-				$sql1 = "select  from score_table,score_judge_info,score_contestent_info where sperker_number = '$parm' and (flags !='1') and
-					(score_table.judge_number=score_judge_info.ju_number and score_table.sperker_number=score_contestent_info.number) "; 
-			$query = $this->db->query($sql1);
-			$result = $query->result_array();
-			return $result;
+			// if($spknum == $parm){
+
+			// $result['judge_number_flag'] =0; //当此参数为0时，选手未改变。
+
+			// }else if($spknum!=$parm){
+				
+			// 	$result['judge_number_flag'] = 1;//当此参数为1时，是下一位选手。
+			// }
+			
+			//zhishi
+				// $sql1 = "select score_table.judge_number,score_table.sperker_number,
+				// score_table.score,score_judge_info.ju_name,score_judge_info.ju_name,
+				// score_judge_info.ju_photo,score_judge_info.ju_info
+				//  from score_table AS st,score_judge_info AS sji,
+				// score_contestent_info AS sci where st.sperker_number = '$parm' and (st.flags !='1') and
+				// 	(st.judge_number=sji.ju_number and st.sperker_number=sci.number) ";
+
+			  
+
+			if(	$parm == $spknum )
+			{
+				$is_next = 0; //当此参数为0时，选手未改变。
+			}
+			else
+			{
+				$is_next = 1;//当此参数为1时，是下一位选手。
+
+			}
+
+			$sql1 = "SELECT '$is_next' AS is_next,score_table.judge_number,
+					score_table.sperker_number,score_table.score,
+					score_judge_info.ju_name,
+					score_judge_info.ju_name,
+					score_judge_info.ju_photo,
+					score_judge_info.ju_info 
+					FROM score_table,score_judge_info 
+					WHERE 
+					score_table.sperker_number = '$parm' AND 
+					(score_table.judge_number=score_judge_info.ju_number) ";
+					$query = $this->db->query($sql1);
+					$result = $query->result_array();
+					
+					if(count( $result) > 0)
+					{
+						 return $result;
+					}
+					else
+					{
+						
+						return array("is_next" => $is_next);
+					}
+
+
 		
 			
 		 }else{
@@ -78,15 +124,7 @@ class console_model extends CI_Model{
 
 	}
 
-	// public function m_flag(){
-
-	// 			$sql2 = "update score_table set flags='1'";
-	// 			$this->db->simple_query($sql2);
-
-			
-
-
-	// }
+	
 	//功能：返回最大值、最小值、及去掉最值后的均值
 	public function athlete_score_fin(){
 		$sql = "select number from score_transition2 where id=(select max(id) from score_transition2)";	
@@ -95,18 +133,18 @@ class console_model extends CI_Model{
 		
 		if($res){
 			$parm = $res[0]['number'];
-			$sql1 = "select score from score_table where sperker_number = '$parm'";
+			$sql1 = "select score_table.score,score_contestent_info.name,score_contestent_info.school,
+			score_contestent_info.number,score_contestent_info.lecture,
+			score_contestent_info.photo 
+			from score_table,score_contestent_info where score_table.sperker_number = '$parm' AND score_contestent_info.number = '$parm'";
 			
-			$sql_f = "update score_table set flags ='1'";
-
-			$f = $this->db->simple_query($sql_f);
-			// print_r($f);
+			
 			// $sql_f = "update score_table set flags ='1' where sperker_number='$parm'";
 			// $this->db->simple_query($sql_f);
 			$query = $this->db->query($sql1);
 
 			$result = $query->result_array();
-			// print_r($result);
+			
 			sort($result);
 			
 			$i=0;
@@ -117,7 +155,12 @@ class console_model extends CI_Model{
 				return "数据不够";
 
 			}else{
-					$data['min_score']= $result[0]['score'];
+					$data['name'] = $result[0]['name'];
+					$data['number'] = $result[0]['number'];
+					$data['photo'] = $result[0]['photo'];
+					$data['lecture'] =$result[0]['lecture'];
+
+					$data['min_score'] = $result[0]['score'];
 					
 					$data['max_score'] = $result[$i-1]['score'];
 					

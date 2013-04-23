@@ -77,6 +77,7 @@ class console extends CI_Controller{
 						'athlete_number'=>$this->input->post('athlete_number'),
 						'result'=>$this->input->post('result') );
 		$res=$this->console_model->insert_score($data);
+		
 		if($res){
 			echo "1";
 		}else{
@@ -87,14 +88,15 @@ class console extends CI_Controller{
 
 	//**************************
 	//功能：返回一个选手对应所有老师的评分(2012/04/20)
+	//judge_number_flag是判断是否到下个选手，当前端所传参数与我所点评分的参数相同时为0，
+	//若传的参数与我所点评分的人不同，为1；
 	public function athlete_score(){
-			$spknum = $_POST['spknum'];
+		  $spknum = $this->input->post("spknum");
+		  
 		  $res = $this->console_model->last_athlete_score($spknum);
-		 
-		 
+
 		  $data = json_encode($res);
 		  echo $data;
-
 
 	}
 
@@ -104,8 +106,8 @@ class console extends CI_Controller{
 		$res = $this->console_model->athlete_score_fin();
 		
 		$data_result = json_encode($res);
-		// print_r($data_result);
-		echo $data_result;
+		print_r($data_result);
+		//echo $data_result;
 	}
 
 	//功能：判断点击的按钮，返回按钮对应的标志位。

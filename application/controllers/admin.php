@@ -2,7 +2,7 @@
 class Admin extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
-
+		
 		$this->data['base'] = $this->config->item('base_url');
 		$this->data['css'] = $this->config->item('css');
 		$this->data['js'] = $this->config->item('js');
