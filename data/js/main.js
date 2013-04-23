@@ -43,7 +43,7 @@ $("#time_end").click(function(){
     success:function(){
       
     }
-  })                                 //备忘录：点击时间开始：发送5给控制器，控制器返给我5，激活setintrval,此时激活
+  })                                 
 })
 
 var time_move = setInterval(
