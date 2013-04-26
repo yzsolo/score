@@ -2,68 +2,105 @@ $(function(){
   // $("#page_one").hide();
   // $("#page_two").hide();
   // $("#page_three").hide();
-        function run(){
-            if(!second){
-                minute -=1;
-                second = 60;
-                $("#sec1").css("display","none");
-            }else if(second<=10){
-                $("#sec1").css("display","block");
-            }
-            second -=1;
-            $("#min").html(minute);
-            $("#sec2").html(second);
-            if(second ==0 && minute ==0){
-                  clearInterval(setinter);
-              }
-        }
+  // function time(){
+  //       minute = 5;
+  //       second =0;
+  //       $("#min").html(minute);
+  //       $("#sec2").html(second);
+  //       setinter=setInterval(run,1000);
+  //     }
 
-$("#time_start").click(function(){
-  var time_start = 5;
-  $.ajax({
-    type:"POST",
-    url:
-    data:{
-      time_start:time_start
-    }
-    success:function(){
-
-    }
-  })
+$(".start").click(function(){
+      minute = 8;
+      second =0;
+      $("#min").html(minute);
+      $("#sec2").html(second);
+      setinter=setInterval(run,1000);
 })
-
-$("#time_end").click(function(){
-  var time_end = 6;
-  $.ajax({
-    type:"POST",
-    url:
-    data:{
-      time_end:time_end
-    }
-    success:function(){
-      
-    }
-  })                                 
+$(".end").click(function(){
+      clearInterval(setinter);
 })
-
-var time_move = setInterval(
-    $.ajax({
-          type:"POST",
-          url:getRootPath()+"/index.php/console/",
-          success:function(resu){
-            if(### == 5){
-            minute = 5;
-            second =0;
-            $("#min").html(minute);
-            $("#sec2").html(second);
-            setinter=setInterval(run,1000);
-          }else if(### == 6){
-            clearInterval(setinter);
-          }else{
-
-          }
+$(".reset_time").click(function(){
+      $("#min").html("");
+      $("#sec2").html("");
+      $("#sec1").css("display","block");
+})
+function run(){
+      if(!second){
+          minute -=1;
+          second = 60;
+          $("#sec1").css("display","none");
+      }else if(second<=10){
+          $("#sec1").css("display","block");
       }
-    }),1000)
+      second -=1;
+      $("#min").html(minute);
+      $("#sec2").html(second);
+      if(second ==0 && minute ==0){
+            clearInterval(setinter);
+      }
+}
+
+// $("#time_start"    ).click(function(){
+//   var time_start = 5;
+//   $.ajax({
+//     type:"POST",
+//     url:
+//     data:{
+//       time_start:time_start
+//     }
+//     success:function(){
+
+//     }
+//   })
+// })
+
+// $("#time_end").click(function(){
+//   var time_end = 6;
+//   $.ajax({
+//     type:"POST",
+//     url:
+//     data:{
+//       time_end:time_end
+//     }
+//     success:function(){
+      
+//     }
+//   })                                 
+// })
+// var flags;
+// var time_move = setInterval(function(){
+//     $.ajax({
+//           type:"POST",
+//           url:getRootPath()+"/index.php/console/judge_clock",
+//           success:function(resu){
+//                 flags = resu*1;
+//                 if(flags == 5){
+                  
+//                     minute = 5;
+//                     second =0;
+//                     $("#min").html(minute);
+//                     $("#sec2").html(second);
+//                     setinter=setInterval(run,1000);
+
+//                     var k = 8;
+//                     $.ajax({
+//                         type:"POST",
+//                         url:getRootPath()+"/index.php/console/judge_clock",
+//                         data:{data:k},
+//                         success:function(result){
+//                           // flags = result;
+//                           console.log(result);
+//                         }
+//                     })
+//                 }else if(flags == 6){
+//                   clearInterval(setinter);
+//                 }else{
+//                     return true;
+//                 }
+//       }
+//     })
+//   },10000)
   
 
 
@@ -78,15 +115,15 @@ var move2 = setInterval(function(){
             async:true,
             data:{spknum:cur_num},
             success:function(imge){
-                
+                // console.log(imge);
                 var mess = $.parseJSON(imge);
-                // console.log(mess);
-               
+                var is_next;
+                 // console.log(mess);
                 if( mess.is_next == undefined ) {
                     messlen = mess.length;
                     // console.log(messlen);
-                    is_next = mess[0].is_next;
-                  console.log(is_next);
+                   is_next = mess[0].is_next;
+                    console.log(is_next);
                     // $judge_score = $("#judge_score");     
 
                     if( i < messlen ){
@@ -95,14 +132,15 @@ var move2 = setInterval(function(){
                         i++;
                     } else {
                         i = messlen;
-                           }
+                    }
                         // console.log(i);
-                         //console.log("is:"+is_next);
+                        
                 }else{
                         is_next = mess.is_next;
                 } 
                   if(is_next == 1 ) {
                             i = 0;
+                        
                   } 
                 }
             })
@@ -111,25 +149,28 @@ var move2 = setInterval(function(){
 
 
   $('#judges-submit').click(function(){
-        var inputLength = $('.input-small').length;
+        // var inputLength = $('.input-small').length;
         var result = 0;
-        var v =0;
-        //alert(inputLength)
+        // var v =0;
         var judge_number = $(".judge_number").html();
         var athlete_number = $(".athlete_number").html();
          // alert(athlete_number);
-        for(var i=0; i<inputLength; i++){
-        v = parseFloat($('.input-small').eq(i).val());
-        result += v;
+        // for(var i=0; i<inputLength; i++){
+        // v = parseFloat($('.input-small').eq(i).val());
+        // result += v;
+        // }
+        result = $(".input-small").val();
+        // result += 0;
+        // alert(result);
+        if(isNaN(result)){
+          alert("填写错误。");
+          $("#num1").val("");
+        }else{
+          result = parseFloat(result);
         }
         result = result.toFixed(2);
-        // document.write(result);
-        // document.write("<br>");
-        // document.write(judge_number);
-        // document.write(athlete_number);
         if(result!="")
         {
-          //alert("wrong!");
               $.ajax({
 
                     type:"POST",
@@ -143,9 +184,9 @@ var move2 = setInterval(function(){
                     success:function(){
                       //alert("success");
                       
-                       for(var j=0;j<inputLength; j++){
-                      $(".input-small").eq(j).val("");
-                    }
+                       // for(var j=0;j<inputLength; j++){
+                      $("#num1").val("");
+                    // }
 
                     }
                     
@@ -200,12 +241,16 @@ var move2 = setInterval(function(){
               if(result == 1){
                 // alert("开始");
                // window.location.reload()
+                sleep = true;
                 $("#page_one").show();
                 $("#page_two").hide();
                 $("#page_three").hide();
                 $("#judge-score").hide();
                 $(".load_js").html("")
-                // $("#container_judge > ul").empty();
+                var ul_length = $("#container_judge > ul").length;
+                for(var j = 0;j<ul_length;j++){
+                  $("#container_judge > ul").eq(j).remove();
+                }
               }
               else if(result == 2){
                 // alert("评分");
@@ -213,7 +258,6 @@ var move2 = setInterval(function(){
                  $("#page_one").hide();
                  $("#page_three").hide();
                  $("#judge-score").show();
-                
               }
               else if(result == 3){
                 // alert("得分");
@@ -221,7 +265,11 @@ var move2 = setInterval(function(){
                 $("#page_two").hide();
                 $("#page_one").hide();
                 $("#judge-score").hide();
-                $("#container_judge > ul").remove();
+                // $("#container_judge > ul").remove();
+                var ul_length = $("#container_judge > ul").length;
+                for(var j = 0;j<ul_length;j++){
+                  $("#container_judge > ul").eq(j).remove();
+                }
               }
             }
         })
@@ -243,6 +291,14 @@ var move3 = setInterval(function(){
             }
         })
   },1000)
+
+
+if(sleep == true) {
+
+    minute = 5;
+    second = 0;
+    sleep = false ;
+}
 
 function getRootPath() //得到网站的根目录
   { 

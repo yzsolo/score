@@ -190,7 +190,6 @@ class console_model extends CI_Model{
 		$query = $this->db->query($sql);
 		$res = $query->result_array();
 		return $res[0];
-
 	}
 
 	//功能：将评委打的分数写入

@@ -13,6 +13,8 @@ class console extends CI_Controller{
 		$this->load->library('form_validation');
 
 
+
+
 	}
 //功能：评委登录控制
 	public function judges_login(){
@@ -72,7 +74,7 @@ class console extends CI_Controller{
 
 	
 	//接受评委打分数据
-	public function accepted_score($data){
+	public function accepted_score(){
 		$data = array('judge_number' =>$this->input->post('judge_number') ,
 						'athlete_number'=>$this->input->post('athlete_number'),
 						'result'=>$this->input->post('result') );
@@ -129,7 +131,24 @@ class console extends CI_Controller{
 			echo "0";
 		}
 	}
+	//判断时钟是否开始和结束
+	public function judge_clock(){
+		$judge = $this->input->post("data");
+		print_r($judge);
+		$res=$this->console_model->console_flag();
 
+		if(($judge!=8)&&($res['flag4']==1)&&($res['flag5']==0)){
+			// return 5;
+			echo "5";
+		} else if(($judge!=8)&&($res['flag4']==0)&&($res['flag5']==1)){
+			// return 6;
+			echo "6";
+		}else if(($judge==8)&&($res['flag4']==1)&&($res['flag5']==0)){
+			// return 8;
+			echo "8";
+		}
+
+	}
 
 
 	public function screen_info(){

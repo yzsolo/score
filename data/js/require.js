@@ -21,7 +21,6 @@ function change_flag($para){
 						xmlhttpreq = new ActiveXObject("Microsoft.XMLHTTP");
 					}catch(e){}
 				}
-
 			}
 
 		var url = getRootPath()+"/index.php/admin/change_flag/"+$para;

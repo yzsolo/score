@@ -49,36 +49,24 @@
 					<!--老师打分-->
 					<div class="row" id="judge-score">
 						<h1>打分啦：</h1>
-						<table class="table">
+						<label>老师评分：</label>
+						<input type="text" class="input-small" id="num1">
+						<!-- <table class="table">
 							<tr>
-								<td>演讲才能</td>
-								<td>口语表达能力</td>
-								<td>文字能力</td>
-								<td>文字能力</td>
-
+								<td>分数：</td>
+								<td>
+										<input type="text" class="input-small" id="num1">
+								</td>
 							</tr>
 							<form method="post">
 								<tr>
 									<td>
 										<input type="text" class="input-small" id="num1">
-
 									</td>
-									<td>
-										<input type="text" class="input-small" id="num2">
-									</td>
-									<td>
-										<input type="text" class="input-small" id="num3">
-									</td>
-									<td>
-										<input type="text" class="input-small" id="num4">
-
-									</td>
-									
-
 								</tr>
 							</form>
 
-						</table>
+						</table> -->
 						<button class="btn btn-primary" style="float:right" id="judges-submit">提交</button>
 					</div>
 
