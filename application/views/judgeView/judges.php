@@ -1,5 +1,6 @@
 
-<body>
+<body sytle="background:url(http://localhost/score/data/img/background_1.jpg)">
+	
 	<div class="row-fluid" id="con">
 		<div class="container" id="container">
 			<div class="body-con">
@@ -48,26 +49,43 @@
 					
 					<!--老师打分-->
 					<div class="row" id="judge-score">
-						<h1>打分啦：</h1>
-						<label>老师评分：</label>
-						<input type="text" class="input-small" id="num1">
-						<!-- <table class="table">
-							<tr>
-								<td>分数：</td>
-								<td>
-										<input type="text" class="input-small" id="num1">
-								</td>
-							</tr>
-							<form method="post">
-								<tr>
-									<td>
-										<input type="text" class="input-small" id="num1">
-									</td>
-								</tr>
-							</form>
-
-						</table> -->
-						<button class="btn btn-primary" style="float:right" id="judges-submit">提交</button>
+						<!-- <h3>打分啦：</h3> -->
+						<div class="judge_score_div" style="margin-top:20px;margin-left:28px;">
+						<label style="float:left;font-size:20px;margin-top:10px;">老师评分：</label>
+						<input type="text" class="input-large" id="num1">
+						<div class="warning" style="color:red;display:none;">
+							请重新填写
+						</div>
+						<!-- <div id="key_borad_box">
+									<div class="key_borad_text" style="width:300px;height:30px;font-size:20px;"></div>
+									<div class="key_borad">
+									      <ul>
+									            <li><input class="key_borad_input btn btn-large btn-info" name="put" type="button" value=" 1 "></li>
+									            <li><input class="key_borad_input btn btn-large btn-info" name="put" type="button" value=" 2 "></li>
+									            <li><input class="key_borad_input btn btn-large btn-info" name="put" type="button" value=" 3 "></li>
+									             <li><input class="key_borad_input btn btn-large btn-info" name="put" type="button" value=" 4 "></li>
+									            <li><input class="key_borad_input btn btn-large btn-info" name="put" type="button" value=" 5 "></li>
+									            
+									      </ul>
+									       <ul>
+									            <li><input class="key_borad_input btn btn-large btn-info" name="put" type="button" value=" 6 "></li>
+									            <li><input class="key_borad_input btn btn-large btn-info" name="put" type="button" value=" 7 "></li>
+									            <li><input class="key_borad_input btn btn-large btn-info" name="put" type="button" value=" 8 "></li>
+									            <li><input class="key_borad_input btn btn-large btn-info" name="put" type="button" value=" 9 "></li>
+									            <li><input class="key_borad_input btn btn-large btn-info" name="put" type="button" value=" 0 "></li>
+								
+									      </ul>
+									      <ul>
+									           
+									            <li><input class="key_borad_submit btn btn-large btn-info" name="put" type="button" value="提交"></li>
+									         
+									            <li><input class="key_borad_reset btn btn-large btn-info" name="put" type="button" value="重置"></li>
+									            <li><input class="key_borad_input btn btn-large btn-info" name="put" type="button" value="  .  "></li>
+									      </ul>
+									</div>
+						</div> -->
+					</div>
+						<button class="btn btn-primary btn-large" style="float:right" id="judges-submit">提交</button>
 					</div>
 
 				</div>

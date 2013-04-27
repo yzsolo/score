@@ -41,67 +41,6 @@ function run(){
       }
 }
 
-// $("#time_start"    ).click(function(){
-//   var time_start = 5;
-//   $.ajax({
-//     type:"POST",
-//     url:
-//     data:{
-//       time_start:time_start
-//     }
-//     success:function(){
-
-//     }
-//   })
-// })
-
-// $("#time_end").click(function(){
-//   var time_end = 6;
-//   $.ajax({
-//     type:"POST",
-//     url:
-//     data:{
-//       time_end:time_end
-//     }
-//     success:function(){
-      
-//     }
-//   })                                 
-// })
-// var flags;
-// var time_move = setInterval(function(){
-//     $.ajax({
-//           type:"POST",
-//           url:getRootPath()+"/index.php/console/judge_clock",
-//           success:function(resu){
-//                 flags = resu*1;
-//                 if(flags == 5){
-                  
-//                     minute = 5;
-//                     second =0;
-//                     $("#min").html(minute);
-//                     $("#sec2").html(second);
-//                     setinter=setInterval(run,1000);
-
-//                     var k = 8;
-//                     $.ajax({
-//                         type:"POST",
-//                         url:getRootPath()+"/index.php/console/judge_clock",
-//                         data:{data:k},
-//                         success:function(result){
-//                           // flags = result;
-//                           console.log(result);
-//                         }
-//                     })
-//                 }else if(flags == 6){
-//                   clearInterval(setinter);
-//                 }else{
-//                     return true;
-//                 }
-//       }
-//     })
-//   },10000)
-  
 
 
 var i=0;
@@ -123,11 +62,11 @@ var move2 = setInterval(function(){
                     messlen = mess.length;
                     // console.log(messlen);
                    is_next = mess[0].is_next;
-                    console.log(is_next);
+                    // console.log(is_next);
                     // $judge_score = $("#judge_score");     
 
                     if( i < messlen ){
-                        $node = ("<ul class='thumbnails' id='thumbnails'><li class='span2'><div class='thumbnail'><img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'><h3>"+mess[i].ju_name+"</h3><span class='label label-info' id='pic'>已打分"+mess[i].score+"</span></div></li></ul>");
+                        $node = ("<ul class='thumbnails' id='thumbnails'><li class='span2'><div class='thumbnail'><img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'><h3>"+mess[i].ju_name+"</h3><span class='label label-info' id='pic'>已打分</span></div></li></ul>");
                         $('#judge_score').after($node);
                         i++;
                     } else {
@@ -146,56 +85,65 @@ var move2 = setInterval(function(){
             })
   },2000)
 
+// $("#num1").focus(function(){
+//   $(".warning").css('display','none');
+// })
 
 
   $('#judges-submit').click(function(){
-        // var inputLength = $('.input-small').length;
-        var result = 0;
-        // var v =0;
+        result = $(".input-large").val();
         var judge_number = $(".judge_number").html();
-        var athlete_number = $(".athlete_number").html();
-         // alert(athlete_number);
-        // for(var i=0; i<inputLength; i++){
-        // v = parseFloat($('.input-small').eq(i).val());
-        // result += v;
-        // }
-        result = $(".input-small").val();
-        // result += 0;
-        // alert(result);
-        if(isNaN(result)){
-          alert("填写错误。");
-          $("#num1").val("");
-        }else{
-          result = parseFloat(result);
+        var athlete_number = $(".athlete_number").html();    
+        if(result>100){
+              alert("数字过大");
+              $("#num1").val("");
         }
-        result = result.toFixed(2);
-        if(result!="")
+        else if(result<0)
         {
-              $.ajax({
-
-                    type:"POST",
-                    url:getRootPath()+"/index.php/console/accepted_score",
-                    data:
-                    {
-                      judge_number:judge_number,
-                      result:result,
-                      athlete_number:athlete_number
-                    },
-                    success:function(){
-                      //alert("success");
-                      
-                       // for(var j=0;j<inputLength; j++){
-                      $("#num1").val("");
-                    // }
-
-                    }
-                    
-              })
+              alert("数字过小");
+              $("#num1").val("");
         }
         else{
-                alert("发送内容为空！");
-        }
+              if(confirm("确认提交？"))
+              { 
+                      // alert("确认");
+                    // $(".warning").css('display','none');
+                    // var result = 0;
+                    
+                    if(isNaN(result)){
+                          alert("填写错误。");
+                          $("#num1").val("");
+                          $(".warning").css('display','block');
+                    }else{
+                          result = parseFloat(result);
+                    }
+                    result = result.toFixed(2);
+                    if(result!=""){
+                          $.ajax({
+                                  type:"POST",
+                                  url:getRootPath()+"/index.php/console/accepted_score",
+                                  data:
+                                  {
+                                      judge_number:judge_number,
+                                      result:result,
+                                      athlete_number:athlete_number
+                                  },
+                                  success:function(){
+                                      $("#num1").val("");
+                                  }          
+                          })
+                    }
+                    else{
+                          alert("发送内容为空！");
+                    }
 
+              }
+              else{
+                    // alert("否认");
+                    $("#num1").val("");
+                    $(".warning").css('display','block');
+              }
+        }   
 })
 
   
@@ -275,7 +223,34 @@ var move2 = setInterval(function(){
         })
   },1000)
 
-
+// function empty_kbt(){
+//   $(".key_borad_text").empty();
+// }
+// $(".key_borad_input").click(function(){
+//   // alert(document.fromCharCode(46));
+//     var content = $(this).val()*1;
+//     $(".key_borad_text").append(content);
+//   })
+// $(".key_borad_reset").click(function(){
+//   empty_kbt();
+// })
+// $(".key_borad_submit").click(function(){
+//   var val = $(".key_borad_text").val();
+//   if(isNaN(val)){
+//     alert("Not a number");
+//     empty_kbt();
+//   }
+//   else{
+//     if(confirm("是否确认提交？")){
+//       empty_kbt();
+//       return true;
+//     }
+//     else{
+//       empty_kbt();
+//       return false;
+//     }
+//   }
+// })
 
 
 var move3 = setInterval(function(){
@@ -293,12 +268,14 @@ var move3 = setInterval(function(){
   },1000)
 
 
-if(sleep == true) {
+// if(sleep == true) {
 
-    minute = 5;
-    second = 0;
-    sleep = false ;
-}
+//     minute = 5;
+//     second = 0;
+//     sleep = false ;
+// }
+
+
 
 function getRootPath() //得到网站的根目录
   { 

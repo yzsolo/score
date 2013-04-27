@@ -51,16 +51,16 @@
   </div>
   <!-- page1 end -->
 <!-- page2 start -->
-<div class="row" id="page_two">
+<div class="container" id="page_two">
     <div class="container" id="container_judge">
       <div class="row" id="judge_score">
-        <h1>评委正在打分哦~~</h1>
+        <h2>评委打分状态：</h2>
       </div>
     </div>
   </div>
 <!-- page2 end -->
 <!-- page3 start -->
-<div class="container" id="page_three">
+<div class="container well" id="page_three">
     <div class="row">
       
         <ul class="thumbnails" id="thumbnails">
@@ -73,7 +73,7 @@
         </ul>
         <h3>去掉最高分：<label class="label label-important" style="height:30px;font-size:25px;line-height:30px;" id="maxscore"></label></h3>
         <h3>去掉最低分：<label class="label label-info" style="height:30px;font-size:25px;line-height:30px;" id="minscore"></label></h3>
-        <h3>&nbsp;&nbsp;&nbsp;&nbsp;最终得分：<label class="label label-success" style="height:30px;font-size:25px;line-height:30px;" id="finscore"></label></h3>
+        <h3>最终得分：<label class="label label-success" style="height:30px;font-size:25px;line-height:30px;" id="finscore"></label></h3>
       
     </div>
 
