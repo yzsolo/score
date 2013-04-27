@@ -14,7 +14,6 @@ class console extends CI_Controller{
 
 
 
-
 	}
 //功能：评委登录控制
 	public function judges_login(){
@@ -65,8 +64,10 @@ class console extends CI_Controller{
 		$res = $this->console_model->last_athlete();
 
 		$fin_res=$this->console_model->athlete_info($res['athlete']);
+	
 		$data = json_encode($fin_res);
 		echo $data;
+
 
 	}
 
@@ -80,13 +81,11 @@ class console extends CI_Controller{
 						'result'=>$this->input->post('result') );
 		$res=$this->console_model->insert_score($data);
 		
-		if($res){
-			echo "1";
-		}else{
-			echo "0";
-		}
+		return $res;
+
 
 	}
+
 
 	//**************************
 	//功能：返回一个选手对应所有老师的评分(2012/04/20)
@@ -101,6 +100,14 @@ class console extends CI_Controller{
 		  echo $data;
 
 	}
+	//功能：返回所有评委的编号和名字
+	public function all_judge_info(){
+		$res = $this->console_model->all_judge_info();
+		$data = json_encode($res);
+		print_r($data);
+		return $data;
+
+	}
 
 	//**************************
 	//功能：返回一个选手的最后得分信息,其中将返回最大值、最小值，及去掉最值后的均值。(2012/04/20)
@@ -108,8 +115,8 @@ class console extends CI_Controller{
 		$res = $this->console_model->athlete_score_fin();
 		
 		$data_result = json_encode($res);
-		print_r($data_result);
-		//echo $data_result;
+		
+		echo $data_result;
 	}
 
 	//功能：判断点击的按钮，返回按钮对应的标志位。
@@ -131,25 +138,7 @@ class console extends CI_Controller{
 			echo "0";
 		}
 	}
-	//判断时钟是否开始和结束
-	public function judge_clock(){
-		$judge = $this->input->post("data");
-		print_r($judge);
-		$res=$this->console_model->console_flag();
-
-		if(($judge!=8)&&($res['flag4']==1)&&($res['flag5']==0)){
-			// return 5;
-			echo "5";
-		} else if(($judge!=8)&&($res['flag4']==0)&&($res['flag5']==1)){
-			// return 6;
-			echo "6";
-		}else if(($judge==8)&&($res['flag4']==1)&&($res['flag5']==0)){
-			// return 8;
-			echo "8";
-		}
-
-	}
-
+	
 
 	public function screen_info(){
 		$this->load->view("template/header",$this->data);
@@ -157,9 +146,6 @@ class console extends CI_Controller{
 		$this->load->view("template/footer",$this->data);
 
 	}
-
-
-
 
 
 

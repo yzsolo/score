@@ -172,7 +172,21 @@ class console_model extends CI_Model{
 					}
 					$fin_score=$res/($i-2);
 					
-					$data['fin_score'] = $fin_score;
+					$data['fin_score'] = number_format($fin_score,'.','');
+					$sql3 = "INSERT INTO score_contestent_info (final_score) VALUES('$data[fin_score]')
+						";
+					$this->db->simple_query($sql3);
+					$parm2 = $result[0]['number'];
+					$sql4 = "SELECT score_table.judge_number,score_table.score,score_judge_info.ju_name
+					 FROM score_table,score_judge_info WHERE score_table.sperker_number = '$parm2' AND 
+					 score_table.judge_number = score_judge_info.ju_number";
+					 $q = $this->db->query($sql4);
+
+					 $result_all=$q->result_array();
+
+					 //print_r($result_all[0]);
+
+					 $data['all_score'] = $result_all[0];
 					
 					return $data;
 				}
@@ -196,9 +210,27 @@ class console_model extends CI_Model{
 	public function insert_score($data){
 		$sql = "insert into score_table (judge_number,sperker_number,score) values('$data[judge_number]','$data[athlete_number]','$data[result]')";
 		$query = $this->db->simple_query($sql);
-		return $query;
+		if($query){
+			$sql2 = "SELECT score_table.score,score_contestent_info.name,score_table.sperker_number
+					FROM score_table,score_contestent_info 
+					WHERE score_table.judge_number = '11' AND score_contestent_info.number = score_table.sperker_number";
+			$result = $this->db->query($sql2);
+			$res = $result->result_array();
+			return $res;
+		}
+		
 
 
+	}
+
+	//功能：返回所有评委的信息
+	public function all_judge_info(){
+		$sql = "SELECT ju_name,ju_number,ju_photo
+				FROM score_judge_info
+		";
+		$query = $this->db->query($sql);
+		$res = $query->result_array();
+		return $res;
 	}
 
 }

@@ -3,6 +3,7 @@ class Admin_model extends CI_Model{
 	public function __construct(){
 		parent::__construct();
 		$this->load->database();
+		
 	}
 	public function login_model($parm){
 		$sql = "select user_pass from score_console_user where user_name='$parm[user]'";

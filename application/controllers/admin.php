@@ -14,6 +14,7 @@ class Admin extends CI_Controller{
 		$this->load->library('form_validation');
 
 
+
 	}
 	public function login(){
 
@@ -83,16 +84,19 @@ class Admin extends CI_Controller{
 		 		$this->load->view("template/header",$this->data);
 				$this->load->view("manageView/man-add-info");
 		 	}else{
-		 		$config['upload_path'] = getcwd().'/data/upload/';
+		 		// $config['upload_path'] = $_SERVER['SERVER_NAME'].'/score/data/upload/';
+
+		 		//$config['upload_path'] = SERVER_PATH.'data/upload/';
 		 		$config['allowed_types'] = 'jpg|png|jpeg|gif';
-		 		$config['max_size'] ='100';
+		 		$config['max_size'] ='2048';
 		 		$config['max_width'] ='0';
 		 		$config['max_height'] ='0';
 		 		$config['remove_spaces']=TRUE;
 		 		$config['overwrite']=true;
 		 		$config['encrypt_name']=false;
 		 		$this->load->library('upload',$config);
-		 		
+		 		echo $config['upload_path'];
+		 		//fopen(base_url()."data/upload", "w+r");
 		 		if(!$this->upload->do_upload('userfile')){
 		 			$error = array('error'=>$this->upload->display_errors());
 		 			print_r($error);
