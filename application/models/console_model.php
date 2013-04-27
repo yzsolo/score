@@ -186,7 +186,7 @@ class console_model extends CI_Model{
 
 					 //print_r($result_all[0]);
 
-					 $data['all_score'] = $result_all[0];
+					 $data['all_score'] = $result_all;
 					
 					return $data;
 				}
