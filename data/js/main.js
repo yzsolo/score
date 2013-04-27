@@ -41,6 +41,67 @@ function run(){
       }
 }
 
+// $("#time_start"    ).click(function(){
+//   var time_start = 5;
+//   $.ajax({
+//     type:"POST",
+//     url:
+//     data:{
+//       time_start:time_start
+//     }
+//     success:function(){
+
+//     }
+//   })
+// })
+
+// $("#time_end").click(function(){
+//   var time_end = 6;
+//   $.ajax({
+//     type:"POST",
+//     url:
+//     data:{
+//       time_end:time_end
+//     }
+//     success:function(){
+      
+//     }
+//   })                                 
+// })
+// var flags;
+// var time_move = setInterval(function(){
+//     $.ajax({
+//           type:"POST",
+//           url:getRootPath()+"/index.php/console/judge_clock",
+//           success:function(resu){
+//                 flags = resu*1;
+//                 if(flags == 5){
+                  
+//                     minute = 5;
+//                     second =0;
+//                     $("#min").html(minute);
+//                     $("#sec2").html(second);
+//                     setinter=setInterval(run,1000);
+
+//                     var k = 8;
+//                     $.ajax({
+//                         type:"POST",
+//                         url:getRootPath()+"/index.php/console/judge_clock",
+//                         data:{data:k},
+//                         success:function(result){
+//                           // flags = result;
+//                           console.log(result);
+//                         }
+//                     })
+//                 }else if(flags == 6){
+//                   clearInterval(setinter);
+//                 }else{
+//                     return true;
+//                 }
+//       }
+//     })
+//   },10000)
+  
 
 
 var i=0;
@@ -57,7 +118,7 @@ var move2 = setInterval(function(){
                 // console.log(imge);
                 var mess = $.parseJSON(imge);
                 var is_next;
-                 // console.log(mess);
+                  // console.log(mess[0].judge_number);
                 if( mess.is_next == undefined ) {
                     messlen = mess.length;
                     // console.log(messlen);
@@ -66,7 +127,7 @@ var move2 = setInterval(function(){
                     // $judge_score = $("#judge_score");     
 
                     if( i < messlen ){
-                        $node = ("<ul class='thumbnails' id='thumbnails'><li class='span2'><div class='thumbnail'><img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'><h3>"+mess[i].ju_name+"</h3><span class='label label-info' id='pic'>已打分</span></div></li></ul>");
+                        $node = ("<ul class='thumbnails' id='thumbnails'><li class='span2'><div class='thumbnail'><img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'><h3>"+mess[i].ju_name+"</h3><span class='label label-info' id='pic'>已打分"+mess[i].score+"</span></div></li></ul>");
                         $('#judge_score').after($node);
                         i++;
                     } else {
@@ -85,9 +146,9 @@ var move2 = setInterval(function(){
             })
   },2000)
 
-// $("#num1").focus(function(){
-//   $(".warning").css('display','none');
-// })
+$("#num1").focus(function(){
+  $(".warning").css('display','none');
+})
 
 
   $('#judges-submit').click(function(){
@@ -223,34 +284,34 @@ var move2 = setInterval(function(){
         })
   },1000)
 
-// function empty_kbt(){
-//   $(".key_borad_text").empty();
-// }
-// $(".key_borad_input").click(function(){
-//   // alert(document.fromCharCode(46));
-//     var content = $(this).val()*1;
-//     $(".key_borad_text").append(content);
-//   })
-// $(".key_borad_reset").click(function(){
-//   empty_kbt();
-// })
-// $(".key_borad_submit").click(function(){
-//   var val = $(".key_borad_text").val();
-//   if(isNaN(val)){
-//     alert("Not a number");
-//     empty_kbt();
-//   }
-//   else{
-//     if(confirm("是否确认提交？")){
-//       empty_kbt();
-//       return true;
-//     }
-//     else{
-//       empty_kbt();
-//       return false;
-//     }
-//   }
-// })
+function empty_kbt(){
+  $(".key_borad_text").empty();
+}
+$(".key_borad_input").click(function(){
+  // alert(document.fromCharCode(46));
+    var content = parseFloat($(this).val());
+    $(".key_borad_text").append(content);
+  })
+$(".key_borad_reset").click(function(){
+  empty_kbt();
+})
+$(".key_borad_submit").click(function(){
+  var val = parseFloat($(".key_borad_text").val());
+  if(isNaN(val)){
+    alert("Not a number");
+    empty_kbt();
+  }
+  else{
+    if(confirm("是否确认提交？")){
+      empty_kbt();
+      return true;
+    }
+    else{
+      empty_kbt();
+      return false;
+    }
+  }
+})
 
 
 var move3 = setInterval(function(){

@@ -16,9 +16,9 @@
 	position:relative;
 }
 
-/*#judge_score span{
+#judge_score span{
 	display:none;
-}*/
+}
 
 #judge_score{
 	margin-left:10px;

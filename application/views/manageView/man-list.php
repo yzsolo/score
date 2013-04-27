@@ -45,9 +45,9 @@
 					<a href="<?php echo base_url().'index.php/admin/stu_info/'.$value['number'];?>" role="button" class="btn btn-primary span1" onclick="change_flag(1)">开始</a>
 					<a href="<?php echo base_url().'index.php/admin/stu_scoring/'.$value['number'];?>" role="button" class="btn btn-primary span1" onclick="change_flag(2)">评分</a>
 					<a href="<?php echo base_url().'index.php/admin/stu_fin_score/'.$value['number'];?>" role="button" class="btn btn-primary span1" onclick="change_flag(3)">最后成绩</a>
-					<a href="#" role="button" class="btn btn-primary span1" onclick="change_flag(4)">时间开始</a>
+					<!-- <a href="#" role="button" class="btn btn-primary span1" onclick="change_flag(4)">时间开始</a>
 					<a href="#" role="button" class="btn btn-primary span1" onclick="change_flag(5)">时间结束</a>
-
+ -->
 				</td>
 				<td>
 					<a href="<?php echo base_url().'index.php/admin/modify/'.$value['id'].'/1';?>" role="button" class="btn btn-success">修改</a>

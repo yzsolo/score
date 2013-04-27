@@ -56,7 +56,7 @@
 						<div class="warning" style="color:red;display:none;">
 							请重新填写
 						</div>
-						<!-- <div id="key_borad_box">
+						<div id="key_borad_box">
 									<div class="key_borad_text" style="width:300px;height:30px;font-size:20px;"></div>
 									<div class="key_borad">
 									      <ul>
@@ -83,7 +83,7 @@
 									            <li><input class="key_borad_input btn btn-large btn-info" name="put" type="button" value="  .  "></li>
 									      </ul>
 									</div>
-						</div> -->
+						</div> 
 					</div>
 						<button class="btn btn-primary btn-large" style="float:right" id="judges-submit">提交</button>
 					</div>

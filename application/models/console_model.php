@@ -172,9 +172,9 @@ class console_model extends CI_Model{
 					}
 					$fin_score=$res/($i-2);
 					
-					$data['fin_score'] = number_format($fin_score,'.','');
-					$sql3 = "INSERT INTO score_contestent_info (final_score) VALUES('$data[fin_score]')
-						";
+					$data['fin_score'] = round($fin_score,2);
+					$sql3 = "UPDATE score_contestent_info SET final_score = '$data[fin_score]'
+						WHERE score_contestent_info.number = '$data[number]'";
 					$this->db->simple_query($sql3);
 					$parm2 = $result[0]['number'];
 					$sql4 = "SELECT score_table.judge_number,score_table.score,score_judge_info.ju_name
