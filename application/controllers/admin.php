@@ -86,7 +86,7 @@ class Admin extends CI_Controller{
 		 	}else{
 		 		// $config['upload_path'] = $_SERVER['SERVER_NAME'].'/score/data/upload/';
 
-		 		//$config['upload_path'] = SERVER_PATH.'data/upload/';
+		 		$config['upload_path'] = './data/upload/';
 		 		$config['allowed_types'] = 'jpg|png|jpeg|gif';
 		 		$config['max_size'] ='2048';
 		 		$config['max_width'] ='0';

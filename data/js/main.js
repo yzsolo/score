@@ -9,10 +9,11 @@ $(function(){
   //       $("#sec2").html(second);
   //       setinter=setInterval(run,1000);
   //     }
-
+$("#min").html("0");
+$("#sec2").html("0");
 $(".start").click(function(){
-      minute = 8;
-      second =0;
+      minute = 0;
+      second =9;
       $("#min").html(minute);
       $("#sec2").html(second);
       setinter=setInterval(run,1000);
@@ -21,8 +22,8 @@ $(".end").click(function(){
       clearInterval(setinter);
 })
 $(".reset_time").click(function(){
-      $("#min").html("");
-      $("#sec2").html("");
+      $("#min").html("0");
+      $("#sec2").html("0");
       $("#sec1").css("display","block");
 })
 function run(){
@@ -117,18 +118,23 @@ var move2 = setInterval(function(){
             success:function(imge){
                 // console.log(imge);
                 var mess = $.parseJSON(imge);
+                // 所有老师对当前选手的评分 start
                 var is_next;
-                  // console.log(mess[0].judge_number);
+                  // console.log(mess[0].is_next);
+                  // console.log(mess.length);
                 if( mess.is_next == undefined ) {
                     messlen = mess.length;
                     // console.log(messlen);
                    is_next = mess[0].is_next;
                     // console.log(is_next);
                     // $judge_score = $("#judge_score");     
-
+                    // console.log(mess[i].judge_number);
                     if( i < messlen ){
+                        // $("#judge_score span").eq(mess[i].judge_number-1).show();
                         $node = ("<ul class='thumbnails' id='thumbnails'><li class='span2'><div class='thumbnail'><img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'><h3>"+mess[i].ju_name+"</h3><span class='label label-info' id='pic'>已打分"+mess[i].score+"</span></div></li></ul>");
                         $('#judge_score').after($node);
+                        $judge_score = ("<tr class='span6' style='border:0px solid #000;line-height:25px;'><td class='score_list span3'>"+mess[i].ju_name+"</td><td class='span3'>"+mess[i].score+"</td></tr>")
+                        $('#judge_score_list').append($judge_score);
                         i++;
                     } else {
                         i = messlen;
@@ -144,7 +150,7 @@ var move2 = setInterval(function(){
                   } 
                 }
             })
-  },2000)
+  },1000)
 
 $("#num1").focus(function(){
   $(".warning").css('display','none');
@@ -228,6 +234,7 @@ $("#num1").focus(function(){
                     $(".stu_num").html(message[0].number);
                     //screen_info  start
                     $('#screen_num strong').html(message[0].number + "号参赛选手");
+                    $("#screen_img").attr("src",message[0].photo);
                     $("p[name='screen_p1']").html("姓名：" + message[0].name);
                     $("p[name='screen_p2']").html("学校：" + message[0].school);
                     $("p[name='screen_p3']").html("主题：" + message[0].lecture);
@@ -236,6 +243,8 @@ $("#num1").focus(function(){
                     //judges_tercher start
                     //judges_teacher end
                     //fin_score  start
+                    $("#three_img img").attr("src",message[0].photo);
+                    $("#three_img h3").html(message[0].name);
                     //fin_score  end
               }
         })
@@ -256,9 +265,10 @@ $("#num1").focus(function(){
                 $("#page_three").hide();
                 $("#judge-score").hide();
                 $(".load_js").html("")
-                var ul_length = $("#container_judge > ul").length;
+                var ul_length = $("#judge_score span").length;
                 for(var j = 0;j<ul_length;j++){
-                  $("#container_judge > ul").eq(j).remove();
+                  $("#judge_score span").eq(j).remove();
+                  $(".score_list").eq(j).remove();
                 }
               }
               else if(result == 2){
@@ -275,43 +285,44 @@ $("#num1").focus(function(){
                 $("#page_one").hide();
                 $("#judge-score").hide();
                 // $("#container_judge > ul").remove();
-                var ul_length = $("#container_judge > ul").length;
+                var ul_length = $("#judge_score span").length;
                 for(var j = 0;j<ul_length;j++){
-                  $("#container_judge > ul").eq(j).remove();
+                  $("#judge_score span").eq(j).remove();
+                   $(".score_list").eq(j).remove();
                 }
               }
             }
         })
   },1000)
 
-function empty_kbt(){
-  $(".key_borad_text").empty();
-}
-$(".key_borad_input").click(function(){
-  // alert(document.fromCharCode(46));
-    var content = parseFloat($(this).val());
-    $(".key_borad_text").append(content);
-  })
-$(".key_borad_reset").click(function(){
-  empty_kbt();
-})
-$(".key_borad_submit").click(function(){
-  var val = parseFloat($(".key_borad_text").val());
-  if(isNaN(val)){
-    alert("Not a number");
-    empty_kbt();
-  }
-  else{
-    if(confirm("是否确认提交？")){
-      empty_kbt();
-      return true;
-    }
-    else{
-      empty_kbt();
-      return false;
-    }
-  }
-})
+// function empty_kbt(){
+//   $(".key_borad_text").empty();
+// }
+// $(".key_borad_input").click(function(){
+//   // alert(document.fromCharCode(46));
+//     var content = parseFloat($(this).val());
+//     $(".key_borad_text").append(content);
+//   })
+// $(".key_borad_reset").click(function(){
+//   empty_kbt();
+// })
+// $(".key_borad_submit").click(function(){
+//   var val = parseFloat($(".key_borad_text").val());
+//   if(isNaN(val)){
+//     alert("Not a number");
+//     empty_kbt();
+//   }
+//   else{
+//     if(confirm("是否确认提交？")){
+//       empty_kbt();
+//       return true;
+//     }
+//     else{
+//       empty_kbt();
+//       return false;
+//     }
+//   }
+// })
 
 
 var move3 = setInterval(function(){

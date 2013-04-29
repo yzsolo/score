@@ -68,7 +68,6 @@ class console extends CI_Controller{
 		$data = json_encode($fin_res);
 		echo $data;
 
-
 	}
 
 
