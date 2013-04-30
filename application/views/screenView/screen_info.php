@@ -1,17 +1,3 @@
-  <style type="text/css" media="screen">
-  #min1,#min,#point,#sec1,#sec2{
-      float:left;
-      position:relative;
-      margin-top:25px;
-      margin-left:2px;
-     }
-  #box{
-    background-color:#999;
-    font-size:100px;
-  }
-    
-  </style>
-</head>
 <body>
   <!-- page1 start-->
 <div class="container well" id="page_one">
@@ -45,13 +31,13 @@
                           <div id="sec2"></div>
         </div>
   </div>
-  <input type="button" value = "r" class="reset_time" style="border:0px solid #eee;color:#edd;"/>
   <input type="button" value = "s" class="start" style="border:0px solid #eee;color:#edd;"/>
   <input type="button" value = "e" class="end"  style="border:0px solid #eee;color:#edd;"/>
+  <input type="button" value = "r" class="reset_time" style="border:0px solid #eee;color:#edd;"/>
   </div>
   <!-- page1 end -->
 <!-- page2 start -->
-<div class="container" id="page_two">
+<div class="container" id="page_two" style="display:none;">
     <div class="container" id="container_judge">
       <div class="row" id="judge_score">
         <h2>评委打分状态：</h2>
@@ -60,7 +46,7 @@
   </div>
 <!-- page2 end -->
 <!-- page3 start -->
-<div class="container well" id="page_three">
+<div class="container well" id="page_three" style="display:none;">
     <div class="row">     
         <ul class="thumbnails" id="thumbnails">
           <li class="span3">

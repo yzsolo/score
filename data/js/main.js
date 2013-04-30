@@ -42,67 +42,6 @@ function run(){
       }
 }
 
-// $("#time_start"    ).click(function(){
-//   var time_start = 5;
-//   $.ajax({
-//     type:"POST",
-//     url:
-//     data:{
-//       time_start:time_start
-//     }
-//     success:function(){
-
-//     }
-//   })
-// })
-
-// $("#time_end").click(function(){
-//   var time_end = 6;
-//   $.ajax({
-//     type:"POST",
-//     url:
-//     data:{
-//       time_end:time_end
-//     }
-//     success:function(){
-      
-//     }
-//   })                                 
-// })
-// var flags;
-// var time_move = setInterval(function(){
-//     $.ajax({
-//           type:"POST",
-//           url:getRootPath()+"/index.php/console/judge_clock",
-//           success:function(resu){
-//                 flags = resu*1;
-//                 if(flags == 5){
-                  
-//                     minute = 5;
-//                     second =0;
-//                     $("#min").html(minute);
-//                     $("#sec2").html(second);
-//                     setinter=setInterval(run,1000);
-
-//                     var k = 8;
-//                     $.ajax({
-//                         type:"POST",
-//                         url:getRootPath()+"/index.php/console/judge_clock",
-//                         data:{data:k},
-//                         success:function(result){
-//                           // flags = result;
-//                           console.log(result);
-//                         }
-//                     })
-//                 }else if(flags == 6){
-//                   clearInterval(setinter);
-//                 }else{
-//                     return true;
-//                 }
-//       }
-//     })
-//   },10000)
-  
 
 
 var i=0;
@@ -120,15 +59,13 @@ var move2 = setInterval(function(){
                 var mess = $.parseJSON(imge);
                 // 所有老师对当前选手的评分 start
                 var is_next;
-                  // console.log(mess[0].is_next);
-                  // console.log(mess.length);
+                  
                 if( mess.is_next == undefined ) {
+
                     messlen = mess.length;
-                    // console.log(messlen);
-                   is_next = mess[0].is_next;
-                    // console.log(is_next);
-                    // $judge_score = $("#judge_score");     
-                    // console.log(mess[i].judge_number);
+                  
+                    is_next = mess[0].is_next;
+                  
                     if( i < messlen ){
                         // $("#judge_score span").eq(mess[i].judge_number-1).show();
                         $node = ("<ul class='thumbnails' id='thumbnails'><li class='span2'><div class='thumbnail'><img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'><h3>"+mess[i].ju_name+"</h3><span class='label label-info' id='pic'>已打分"+mess[i].score+"</span></div></li></ul>");
@@ -172,11 +109,7 @@ $("#num1").focus(function(){
         }
         else{
               if(confirm("确认提交？"))
-              { 
-                      // alert("确认");
-                    // $(".warning").css('display','none');
-                    // var result = 0;
-                    
+              {     
                     if(isNaN(result)){
                           alert("填写错误。");
                           $("#num1").val("");
@@ -214,8 +147,6 @@ $("#num1").focus(function(){
 })
 
   
-  /*  var id = $("#hero-unit p").html();
-    alert(id);*/
   var move = setInterval(function(){
         $.ajax({
               type:"POST",
@@ -262,13 +193,8 @@ $("#num1").focus(function(){
                 $("#page_two").hide();
                 $("#page_three").hide();
                 $("#judge-score").hide();
-                $(".load_js").html("")
-                var ul_length = $("#judge_score span").length;
-                for(var j = 0;j<ul_length;j++){
-                  $("#judge_score span").eq(j).remove();
-                  // $("#judge_score_list > tr").eq(j).remove();
-                }
-                var tr_length = $("#judge_score_list > tr").length;
+                $(".load_js").html("");
+                var tr_length = $("#judge_score_list tr").length;
                 for(var u=0;u<tr_length;u++){
                   $("#judge_score_list > tr").eq(u).remove();
                 }
@@ -286,6 +212,10 @@ $("#num1").focus(function(){
                 $("#page_two").hide();
                 $("#page_one").hide();
                 $("#judge-score").hide();
+                var ul_length = $("#container_judge ul").length;
+                for(var j = 0;j<ul_length;j++){
+                  $("#container_judge ul").eq(j).remove();
+                }
                 }
               }
             })
