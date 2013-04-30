@@ -105,27 +105,30 @@ class Admin extends CI_Controller{
 		 		// $this->upload->set_upload_path($path);
 		 	
 		 		//fopen(base_url()."data/upload", "w+r");
+		 		$str ="";
 		 		if(!$this->upload->do_upload("userfile")){
 		 			$error = array('error'=>$this->upload->display_errors());
 		 			print_r($error);
 		 			$this->load->view('template/header',$this->data);
 		 			$this->load->view('manageView/man-add-info',$error);
 		 		}else{
+		 			
 		 			$data_file=array('upload_data'=>$this->upload->data());
 		 			
-		 			$str=mb_substr($data_file['upload_data']['full_path'],14);
+		 			$str=mb_substr($data_file['upload_data']['full_path'],12);
+		 		}
 		 			//print $_SERVER['HTTP_HOST']."/".$str;
-			 		$datas = array('optionsradios' =>$this->input->post('optionsRadios') ,
-			 						'username' =>$this->input->post('user-name'),
-			 						'number' =>$this->input->post('number'),
-			 						'school' =>$this->input->post('school'),
-			 						'lecture' =>$this->input->post('lecture'),
-			 						'motto' =>$this->input->post('motto'),
-			 						'man_info' =>$this->input->post('man_info'),
-			 						'img_path' =>("http://".$_SERVER['HTTP_HOST']."/".$str)
-			 						 );
+			 	$datas = array('optionsradios' =>$this->input->post('optionsRadios') ,
+			 					'username' =>$this->input->post('user-name'),
+			 					'number' =>$this->input->post('number'),
+			 					'school' =>$this->input->post('school'),
+			 					'lecture' =>$this->input->post('lecture'),
+			 					'motto' =>$this->input->post('motto'),
+			 					'man_info' =>$this->input->post('man_info'),
+			 					'img_path' =>("http://".$_SERVER['HTTP_HOST']."/".$str)
+			 					 );
 			 	
-			 		$flag = $this->admin_model->add_info($datas);
+			 	$flag = $this->admin_model->add_info($datas);
 			 	
 		 		
 		 		if($flag){
@@ -138,7 +141,7 @@ class Admin extends CI_Controller{
 		 			redirect("./admin/fail");
 		 		}
 
-		 	}
+		 	
 		 }
 
 

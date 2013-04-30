@@ -74,7 +74,7 @@ class console_model extends CI_Model{
 					score_table.sperker_number,score_table.score,
 					score_judge_info.ju_name,
 					score_judge_info.ju_name,
-					score_judge_info.ju_photo,
+					
 					score_judge_info.ju_info 
 					FROM score_table,score_judge_info 
 					WHERE 
@@ -207,7 +207,7 @@ class console_model extends CI_Model{
 
 	//功能：返回所有评委的信息
 	public function all_judge_info(){
-		$sql = "SELECT ju_name,ju_number,ju_photo
+		$sql = "SELECT ju_name,ju_number
 				FROM score_judge_info
 		";
 		$query = $this->db->query($sql);
