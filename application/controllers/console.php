@@ -32,7 +32,7 @@ class console extends CI_Controller{
 				
 				if($f1==0){
 					//禁用用户登录标志
-					 // $this->console_model->judges_flag($user,1);
+					$this->console_model->judges_flag($user,1);
 					$d=$this->session->set_userdata($pass);
 					
 					redirect("./console/judges/".$user);
@@ -68,6 +68,7 @@ class console extends CI_Controller{
 		$data = json_encode($fin_res);
 		echo $data;
 
+
 	}
 
 
@@ -94,7 +95,7 @@ class console extends CI_Controller{
 		  $spknum = $this->input->post("spknum");
 		  
 		  $res = $this->console_model->last_athlete_score($spknum);
-
+		  
 		  $data = json_encode($res);
 		  echo $data;
 
@@ -108,7 +109,7 @@ class console extends CI_Controller{
 
 	}
 
-	//*****************************
+	//**************************
 	//功能：返回一个选手的最后得分信息,其中将返回最大值、最小值，及去掉最值后的均值。(2012/04/20)
 	public function athlete_score_fin(){
 		$res = $this->console_model->athlete_score_fin();
@@ -149,8 +150,7 @@ class console extends CI_Controller{
 
 
 
-
-
+	
 
 
 	public function judges_login_fail(){

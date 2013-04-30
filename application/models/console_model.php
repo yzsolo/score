@@ -60,26 +60,7 @@ class console_model extends CI_Model{
 		 
 		 if($res){
 			$parm = $res[0]['number'];
-			
-			// if($spknum == $parm){
-
-			// $result['judge_number_flag'] =0; //当此参数为0时，选手未改变。
-
-			// }else if($spknum!=$parm){
-				
-			// 	$result['judge_number_flag'] = 1;//当此参数为1时，是下一位选手。
-			// }
-			
-			//zhishi
-				// $sql1 = "select score_table.judge_number,score_table.sperker_number,
-				// score_table.score,score_judge_info.ju_name,score_judge_info.ju_name,
-				// score_judge_info.ju_photo,score_judge_info.ju_info
-				//  from score_table AS st,score_judge_info AS sji,
-				// score_contestent_info AS sci where st.sperker_number = '$parm' and (st.flags !='1') and
-				// 	(st.judge_number=sji.ju_number and st.sperker_number=sci.number) ";
-
-			  
-
+		
 			if(	$parm == $spknum )
 			{
 				$is_next = 0; //当此参数为0时，选手未改变。
@@ -87,14 +68,13 @@ class console_model extends CI_Model{
 			else
 			{
 				$is_next = 1;//当此参数为1时，是下一位选手。
-
 			}
 
 			$sql1 = "SELECT '$is_next' AS is_next,score_table.judge_number,
 					score_table.sperker_number,score_table.score,
 					score_judge_info.ju_name,
 					score_judge_info.ju_name,
-					score_judge_info.ju_photo,
+					
 					score_judge_info.ju_info 
 					FROM score_table,score_judge_info 
 					WHERE 
@@ -114,7 +94,7 @@ class console_model extends CI_Model{
 					}
 
 
-		
+			
 			
 		 }else{
 		 	return 0;
@@ -173,8 +153,10 @@ class console_model extends CI_Model{
 					$fin_score=$res/($i-2);
 					
 					$data['fin_score'] = round($fin_score,2);
-					$sql3 = "UPDATE score_contestent_info SET final_score = '$data[fin_score]'
-						WHERE score_contestent_info.number = '$data[number]'";
+					
+					$sql3 = "UPDATE  score_contestent_info SET final_score = '$data[fin_score]'
+						where score_contestent_info.number = '$data[number]'";
+						print_r($sql3);
 					$this->db->simple_query($sql3);
 					$parm2 = $result[0]['number'];
 					$sql4 = "SELECT score_table.judge_number,score_table.score,score_judge_info.ju_name
@@ -184,7 +166,7 @@ class console_model extends CI_Model{
 
 					 $result_all=$q->result_array();
 
-					 //print_r($result_all[0]);
+					 print_r($result_all);
 
 					 $data['all_score'] = $result_all;
 					
@@ -225,7 +207,7 @@ class console_model extends CI_Model{
 
 	//功能：返回所有评委的信息
 	public function all_judge_info(){
-		$sql = "SELECT ju_name,ju_number,ju_photo
+		$sql = "SELECT ju_name,ju_number
 				FROM score_judge_info
 		";
 		$query = $this->db->query($sql);
@@ -233,4 +215,5 @@ class console_model extends CI_Model{
 		return $res;
 	}
 
+	
 }

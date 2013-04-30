@@ -52,7 +52,7 @@
 				<label >个人信息：</label>
 				<textarea name="man_info" class="span6" placeholder="请输入文字..."></textarea>
 			
-			<?php echo form_open_multipart('admin/add');?>
+			<?php echo form_open_multipart('upload/do_upload');?>
 				<label>私房照：</label>
 				<input type="file" name="userfile">
 				<input class="btn btn-large btn-primary" type="submit" name="submit" value="提交信息">

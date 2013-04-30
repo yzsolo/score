@@ -84,9 +84,12 @@ class Admin extends CI_Controller{
 		 		$this->load->view("template/header",$this->data);
 				$this->load->view("manageView/man-add-info");
 		 	}else{
-		 		// $config['upload_path'] = $_SERVER['SERVER_NAME'].'/score/data/upload/';
+		 		
 
-		 		$config['upload_path'] = './data/upload/';
+		 		$config['upload_path'] = "data/upload/";
+
+		 		//print_r($config['upload_path'] );
+		 		//var_dump(is_dir($config['upload_path']));
 		 		$config['allowed_types'] = 'jpg|png|jpeg|gif';
 		 		$config['max_size'] ='2048';
 		 		$config['max_width'] ='0';
@@ -94,28 +97,38 @@ class Admin extends CI_Controller{
 		 		$config['remove_spaces']=TRUE;
 		 		$config['overwrite']=true;
 		 		$config['encrypt_name']=false;
+		 		
 		 		$this->load->library('upload',$config);
-		 		echo $config['upload_path'];
+		 		$this->upload->initialize($config);
+		 		
+		 		// $path = "data/upload";
+		 		// $this->upload->set_upload_path($path);
+		 	
 		 		//fopen(base_url()."data/upload", "w+r");
-		 		if(!$this->upload->do_upload('userfile')){
+		 		$str ="";
+		 		if(!$this->upload->do_upload("userfile")){
 		 			$error = array('error'=>$this->upload->display_errors());
 		 			print_r($error);
 		 			$this->load->view('template/header',$this->data);
 		 			$this->load->view('manageView/man-add-info',$error);
 		 		}else{
+		 			
 		 			$data_file=array('upload_data'=>$this->upload->data());
-
-			 		$datas = array('optionsradios' =>$this->input->post('optionsRadios') ,
-			 						'username' =>$this->input->post('user-name'),
-			 						'number' =>$this->input->post('number'),
-			 						'school' =>$this->input->post('school'),
-			 						'lecture' =>$this->input->post('lecture'),
-			 						'motto' =>$this->input->post('motto'),
-			 						'man_info' =>$this->input->post('man_info'),
-			 						'img_path' =>($data_file['upload_data']['file_path'].$data_file['upload_data']['file_name'])
-			 						 );
+		 			
+		 			$str=mb_substr($data_file['upload_data']['full_path'],12);
+		 		}
+		 			//print $_SERVER['HTTP_HOST']."/".$str;
+			 	$datas = array('optionsradios' =>$this->input->post('optionsRadios') ,
+			 					'username' =>$this->input->post('user-name'),
+			 					'number' =>$this->input->post('number'),
+			 					'school' =>$this->input->post('school'),
+			 					'lecture' =>$this->input->post('lecture'),
+			 					'motto' =>$this->input->post('motto'),
+			 					'man_info' =>$this->input->post('man_info'),
+			 					'img_path' =>("http://".$_SERVER['HTTP_HOST']."/".$str)
+			 					 );
 			 	
-			 		$flag = $this->admin_model->add_info($datas);
+			 	$flag = $this->admin_model->add_info($datas);
 			 	
 		 		
 		 		if($flag){
@@ -128,7 +141,7 @@ class Admin extends CI_Controller{
 		 			redirect("./admin/fail");
 		 		}
 
-		 	}
+		 	
 		 }
 
 
@@ -165,23 +178,7 @@ class Admin extends CI_Controller{
 		$this->load->view("template/header",$this->data);
 		$this->load->view("manageView/modify",$this->res);
 		if($this->input->post('submit')){
-				$config['upload_path'] = getcwd().'/data/upload/';
-		 		$config['allowed_types'] = 'jpg|png|jpeg|gif';
-		 		$config['max_size'] ='100';
-		 		$config['max_width'] ='0';
-		 		$config['max_height'] ='0';
-		 		$config['remove_spaces']=TRUE;
-		 		$config['overwrite']=false;
-		 		$config['encrypt_name']=TRUE;
-		 		$this->load->library('upload',$config);
-		 		
-		 		if(!$this->upload->do_upload('userfile')){
-		 			$error = array('error'=>$this->upload->display_errors());
-		 			print_r($error);
-		 			$this->load->view('template/header',$this->data);
-		 			$this->load->view('manageView/man-add-info',$error);
-		 		}else{
-		 			$data_file=array('upload_data'=>$this->upload->data());
+			
 
 			 		$datas = array(
 			 						'number' =>$this->input->post('number'),
@@ -189,7 +186,7 @@ class Admin extends CI_Controller{
 			 						'lecture' =>$this->input->post('lecture'),
 			 						'motto' =>$this->input->post('motto'),
 			 						'man_info' =>$this->input->post('man_info'),
-			 						'img_path' =>($data_file['upload_data']['file_path'].$data_file['upload_data']['file_name'])
+			 						
 			 						 );
 
 			 		$fl=$this->admin_model->update_info($parm,$datas,$flag);
@@ -203,7 +200,7 @@ class Admin extends CI_Controller{
 		 			redirect("./admin/fail");
 		 		}
 
-		 	}
+		 	
 		 }
 
 
@@ -222,6 +219,14 @@ class Admin extends CI_Controller{
 		}
 
 
+	}
+	//最后所有成绩汇总
+	public function all_score(){
+		$this->res=$this->admin_model->all_score();
+	
+		$this->load->view("template/header",$this->data);
+		$this->load->view("manageView/all_score",$this->res);
+		 $this->load->view("template/footer",$this->data);
 	}
 
 	//修改score_flag标志位
