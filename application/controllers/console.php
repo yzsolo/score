@@ -108,7 +108,7 @@ class console extends CI_Controller{
 
 	}
 
-	//**************************
+	//*****************************
 	//功能：返回一个选手的最后得分信息,其中将返回最大值、最小值，及去掉最值后的均值。(2012/04/20)
 	public function athlete_score_fin(){
 		$res = $this->console_model->athlete_score_fin();
