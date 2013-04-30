@@ -10,7 +10,7 @@
   					<!-- <div class="span12 text-left text-success" id="screen_num"><h2><small><strong>号参赛选手</strong></small></h2></div> -->
   					<div class="span12 text-left text-success" id="screen_num" style="margin-left:30px;"><h2><small><strong>号参赛选手</strong></small></h2></div>
 					  <div class="span3">
-					        <img data-src="holder.js/150x100" id="screen_img" class="img-rounded" src="img/1.jpg" style="width:200px;height:250px;"alt="">
+					        <img data-src="holder.js/150x100" id="screen_img" class="img-rounded" src="img/1.jpg" alt="">
 					  </div>
 					  <div class="span4" style="margin-top:15px;">
 					        <blockquote>

@@ -258,8 +258,6 @@ $("#num1").focus(function(){
               // console.log(result);
               if(result == 1){
                 // alert("开始");
-               // window.location.reload()
-                sleep = true;
                 $("#page_one").show();
                 $("#page_two").hide();
                 $("#page_three").hide();
@@ -268,7 +266,11 @@ $("#num1").focus(function(){
                 var ul_length = $("#judge_score span").length;
                 for(var j = 0;j<ul_length;j++){
                   $("#judge_score span").eq(j).remove();
-                  $(".score_list").eq(j).remove();
+                  // $("#judge_score_list > tr").eq(j).remove();
+                }
+                var tr_length = $("#judge_score_list > tr").length;
+                for(var u=0;u<tr_length;u++){
+                  $("#judge_score_list > tr").eq(u).remove();
                 }
               }
               else if(result == 2){
@@ -284,15 +286,9 @@ $("#num1").focus(function(){
                 $("#page_two").hide();
                 $("#page_one").hide();
                 $("#judge-score").hide();
-                // $("#container_judge > ul").remove();
-                var ul_length = $("#judge_score span").length;
-                for(var j = 0;j<ul_length;j++){
-                  $("#judge_score span").eq(j).remove();
-                   $(".score_list").eq(j).remove();
                 }
               }
-            }
-        })
+            })
   },1000)
 
 // function empty_kbt(){
