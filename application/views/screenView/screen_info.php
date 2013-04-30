@@ -55,51 +55,6 @@
     <div class="container" id="container_judge">
       <div class="row" id="judge_score">
         <h2>评委打分状态：</h2>
-        <!-- <ul class='thumbnails' id='thumbnails'>
-            <li class='span2'>
-                <div class='thumbnail'>
-                    <img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'>
-                        <h3>杨振</h3>
-                        <span class='label label-info' id='pic'>已打分</span>
-                </div>
-            </li>
-        </ul>
-        <ul class='thumbnails' id='thumbnails'>
-            <li class='span2'>
-                <div class='thumbnail'>
-                    <img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'>
-                        <h3>蛋蛋</h3>
-                        <span class='pic label label-info' id='pic'>已打分</span>
-                </div>
-            </li>
-        </ul>
-        <ul class='thumbnails' id='thumbnails'>
-            <li class='span2'>
-                <div class='thumbnail'>
-                    <img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'>
-                        <h3>彭慧</h3>
-                        <span class='label label-info' id='pic'>已打分</span>
-                </div>
-            </li>
-        </ul>
-        <ul class='thumbnails' id='thumbnails'>
-            <li class='span2'>
-                <div class='thumbnail'>
-                    <img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'>
-                        <h3>伍星</h3>
-                        <span class='label label-info' id='pic'>已打分</span>
-                </div>
-            </li>
-        </ul>
-        <ul class='thumbnails' id='thumbnails'>
-            <li class='span2'>
-                <div class='thumbnail'>
-                    <img data-src='holder.js/300x200' alt='' src='"+mess[i].ju_photo+"'>
-                        <h3>杜旻翔</h3>
-                        <span class='label label-info' id='pic'>已打分</span>
-                </div>
-            </li>
-        </ul>  -->
       </div>
     </div>
   </div>
@@ -115,8 +70,8 @@
             </div>
           </li>
         </ul>
-      <div class="score_list" style="float:left;width:485px;height:400px;margin-left:10px;">
-        <table class="table table-condensed" id="judge_score_list">
+      <div class="score_list" id="judge_score_list" style="float:left;width:420px;height:400px;margin-left:10px;">
+        <table class="table table-condensed">
         </table>     
       </div>
       <div class="max_min" style="width:250px;height:200px;float:left; margin-left:20px;margin-top:-17px;">
