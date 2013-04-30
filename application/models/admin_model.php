@@ -73,12 +73,12 @@ class Admin_model extends CI_Model{
 		if($flag==1){
 			$sql="update score_contestent_info set number = '$datas[number]',
 			school='$datas[school]',lecture='$datas[lecture]',motto='$datas[motto]',
-			info='$datas[man_info]',photo='$datas[img_path]' where id='$parm'";
+			info='$datas[man_info]' where id='$parm'";
 			$query=$this->db->query($sql);
 			return $query;
 		}else if($flag==2){
 			$sql="update score_judge_info set ju_number = '$datas[number]',
-			ju_school='$datas[school]',ju_info='$datas[man_info]',ju_photo='$datas[img_path]'
+			ju_school='$datas[school]',ju_info='$datas[man_info]'
 			where ju_id=$parm";
 			$query=$this->db->query($sql);
 			return $query;
@@ -139,5 +139,14 @@ class Admin_model extends CI_Model{
 			$sql = "update score_flag set flag4='0',flag5='1' where id = '1'";
 			$query = $this->db->query($sql);
 		}
+	}
+
+	public function all_score(){
+		$sql = "SELECT final_score,name,number,school,lecture FROM score_contestent_info ORDER BY final_score DESC";
+		$query=$this->db->query($sql);
+		$res = $query->result_array();
+		return $res; 
+
+
 	}
 }

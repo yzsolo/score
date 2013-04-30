@@ -49,9 +49,7 @@
 				<label>个人信息：</label>
 				<textarea name="man_info" class="span6" value="<?php echo $this->res[0]['info'];?>"></textarea>
 			
-			<?php echo form_open_multipart('admin/add');?>
-				<label>私房照：</label>
-				<input type="file" name="userfile">
+			
 				<input class="btn btn-large btn-primary" type="submit" name="submit" value="提交信息">
 				<input class="btn btn-large btn-warning" type="reset" name="reset" value="重置">
 			</form>
