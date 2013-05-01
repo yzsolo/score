@@ -108,7 +108,7 @@ class Admin extends CI_Controller{
 		 		$str ="";
 		 		if(!$this->upload->do_upload("userfile")){
 		 			$error = array('error'=>$this->upload->display_errors());
-		 			print_r($error);
+		 			// print_r($error);
 		 			$this->load->view('template/header',$this->data);
 		 			$this->load->view('manageView/man-add-info',$error);
 		 		}else{

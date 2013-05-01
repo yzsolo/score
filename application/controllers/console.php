@@ -108,7 +108,12 @@ class console extends CI_Controller{
 		return $data;
 
 	}
-
+	//功能：返回所有评委对当前选手所打的分,对应投影仪第三个页面
+	public function all_judge_score(){
+		$res = $this->console_model->all_judges_score();
+		$data = json_encode($res);
+		echo $data;
+	}
 	//**************************
 	//功能：返回一个选手的最后得分信息,其中将返回最大值、最小值，及去掉最值后的均值。(2012/04/20)
 	public function athlete_score_fin(){

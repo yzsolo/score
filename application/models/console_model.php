@@ -156,19 +156,18 @@ class console_model extends CI_Model{
 					
 					$sql3 = "UPDATE  score_contestent_info SET final_score = '$data[fin_score]'
 						where score_contestent_info.number = '$data[number]'";
-						print_r($sql3);
+					
 					$this->db->simple_query($sql3);
-					$parm2 = $result[0]['number'];
-					$sql4 = "SELECT score_table.judge_number,score_table.score,score_judge_info.ju_name
-					 FROM score_table,score_judge_info WHERE score_table.sperker_number = '$parm2' AND 
-					 score_table.judge_number = score_judge_info.ju_number";
-					 $q = $this->db->query($sql4);
+					// $parm2 = $result[0]['number'];
+					// $sql4 = "SELECT score_table.judge_number,score_table.score,score_judge_info.ju_name
+					//  FROM score_table,score_judge_info WHERE score_table.sperker_number = '$parm2' AND 
+					//  score_table.judge_number = score_judge_info.ju_number";
+					//  $q = $this->db->query($sql4);
 
-					 $result_all=$q->result_array();
+					//  $result_all=$q->result_array();
 
-					 print_r($result_all);
 
-					 $data['all_score'] = $result_all;
+					//  $data['all_score'] = $result_all;
 					
 					return $data;
 				}
@@ -179,7 +178,22 @@ class console_model extends CI_Model{
 		}
 
 	}
+	//功能：返回所有老师对当前选手所打的分数
 
+	public function all_judges_score(){
+		$sql = "select number from score_transition2 where id=(select max(id) from score_transition2)";	
+		$query = $this->db->query($sql);
+		$res = $query->result_array();
+		$parm = $res[0]['number'];
+		$sql4 = "SELECT score_table.score,score_judge_info.ju_name,score_table.score
+					 FROM score_table,score_judge_info WHERE score_table.sperker_number = '$parm' AND 
+					 score_table.judge_number = score_judge_info.ju_number";
+		$q = $this->db->query($sql4);
+
+		$result_all=$q->result_array();
+
+		return $result_all;
+	}
 	//功能：判断点击的是哪个按钮
 	public function console_flag(){
 		$sql = "select * from score_flag where id = '1'";
