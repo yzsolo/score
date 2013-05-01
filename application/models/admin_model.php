@@ -132,13 +132,8 @@ class Admin_model extends CI_Model{
 			$sql = "update score_flag set flag1='0',flag2='0',flag3='1' where id='1'";
 			$query = $this->db->query($sql);
 			
-		}else if($para==4){
-			$sql = "update score_flag set flag4='1',flag5='0' where id = '1'";
-			$query = $this->db->query($sql);
-		}else if($para==5){
-			$sql = "update score_flag set flag4='0',flag5='1' where id = '1'";
-			$query = $this->db->query($sql);
 		}
+		
 	}
 
 	public function all_score(){
